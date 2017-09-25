@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!--{{name}}-->
+
+    <!--<input type="text" v-model='number'>
+    <p>数字是：{{number}}</p>-->
+
+    <card></card>
+    <card></card>
+    <card></card>
+  </div>
+</body>
+<script src="vue.js"></script>
+<script>
+  //一、数据驱动视图：
+  // var vm=new Vue({
+  //   el:"#app",
+  //   data:{
+  //     // name:"我是小王",
+  //   }
+  // })
+  //可以在控制台中输出vm.name='哈哈'，只需操作数据层即可直接改变视图层（页面及时刷新）
+
+  //二、数据双向绑定
+  // var vm=new Vue({
+  //   el:"#app",
+  //   data:{
+  //     number:""
+  //   }
+  // })
+  //input绑定数据层number，驱动数据number的改变；数据层number绑定视图层{{number}}，一变则变
+
+  //三、组件化
+  Vue.component('card',{
+    template:'<div><img src="" alt=""/><h2>标题</h2><p>内容</p><button>按钮</button></div>'
+  })
+  new Vue({
+    el:'#app'
+  })
+  
+</script>
+</html>

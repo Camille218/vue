@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--1.{{花括号}}-->
+  {{data1}}
+  {{num+3}}
+  {{ok?"真":"假"}}
+  <!--2.数据中含有html片段-->
+  <p v-html='data2'></p>
+  <!--3.绑定属性-->
+  <a v-bind:href="data3">链接</a>
+  <a :href="data3">链接</a>
+  <button :disabled='dis_true'>真</button>
+  <button :disabled='dis_false'>假</button>
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+var vm=new Vue({
+  el:'#app',
+  data:{
+    data1:"花花",
+    data2:'<strong>哈哈</strong>',
+    data3:"http://hello.com",
+    dis_true:true,
+    dis_false:false,
+    num:2,
+    ok:true
+  },
+  
+})
+</script>
+</html>
