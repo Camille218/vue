@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--1.v-text指令-->
+  <p v-text='text'></p>
+  {{text}}
+
+  <!--2.v-html 指令-->
+  <p v-html='html'></p>
+
+  <!--3.v-show指令-->
+  <p v-show='show'>显示</p>
+  <p v-show='false'>隐藏</p>
+
+  <!--4.v-if指令-->
+  <p v-if='if_true'>显示</p>
+  <p v-if='if_false'>隐藏</p>
+
+  <!--5.v-else指令-->
+  <!--5.v-if-else指令,自学拓展-->
+  <p v-if='if_1'>if</p>
+  <p v-else>else</p>
+
+  <!--6.v-for指令-->
+  <p v-for='(item,index) in list'>{{index}}---{{item}}</p>
+
+  <!--7.v-bind指令-->
+  <a :href="linkUrl">链接</a>
+  <img :src="'http://taobao.com'+srcUrl" alt="">
+
+  <!--8.v-on指令-->
+  <button @click="say('Tom')">点击</button>
+
+  <!--9.v-model指令-->
+  <input type="text" v-model='msg'>
+  <p>{{msg}}</p>
+
+  <!--10.v-once只渲染一次-->
+   <input type="text" v-model='onceMsg'>
+  <p v-once>{{onceMsg}}</p>
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+var vm=new Vue({
+  el:'#app',
+  data:{
+    text:'哈哈',
+    html:'<b>哈哈</b>',
+    show:true,
+    false:false,
+    if_true:true,
+    if_false:false,
+    if_1:false,
+    list:['1','2','3','4'],
+    linkUrl:'http://www.baidu.com',
+    srcUrl:'/host',
+    msg:'',
+    onceMsg:'发发发'
+  },
+  methods: {
+    say(name){
+      alert('hello'+name)
+    }
+  }
+  
+})
+//如果需要频繁切换显示/隐藏的，就用 v-show ；如果运行后不太可能切换显示/隐藏的，就用 v-if 。
+</script>
+</html>

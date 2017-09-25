@@ -19,6 +19,8 @@
   <a :href="data3">链接</a>
   <button :disabled='dis_true'>真</button>
   <button :disabled='dis_false'>假</button>
+  <!--4.拼接字符串-->
+  <a :href="'http://'+str">链接</a>
 </div>
 </body>
 <script src="vue.js"></script>
@@ -32,7 +34,8 @@ var vm=new Vue({
     dis_true:true,
     dis_false:false,
     num:2,
-    ok:true
+    ok:true,
+    str:"host"
   },
   
 })
