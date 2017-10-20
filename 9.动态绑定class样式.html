@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--动态绑定样式1.对象方式  2.数组样式-->
+  <!--<p :class="{'active':isActive,'danger':isDanger,'good':isGood}">这是文字</p>-->
+  <!--<p :class="[activeClass,errorClass]">这是文字</p>-->
+
+  <!--动态绑定内联样式1.对象方式-->
+  <p :style='{color:colorRed}'>文字</p>
+  <!--<p style="color:red"></p>-->
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+const vm=new Vue({
+  el:'#app',
+  data:{
+    //动态绑定样式
+    // isActive:true,
+    // isDanger:true,
+    // isGood:false,
+
+    //动态绑定内联样式
+    // activeClass:'active',
+    // errorClass:'error'
+
+    colorRed:"red",
+
+  },
+  
+})
+</script>
+</html>

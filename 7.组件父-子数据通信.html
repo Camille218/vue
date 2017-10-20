@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <!--以下是父组件->子组件之间的数据传递,实例为父，组件为子，通过参数props实现通信-->
+  <style>
+    .li{
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--2.1 detail相当于形参，art相当于实参-->
+  <!--<art :detail='art'></art>-->
+
+  <!--2.2 以数组的形式渲染-->
+  <art v-for='item in arts'  :detail='item'></art>
+  
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+  //注：组件的注册一定要在实例之前
+  Vue.component('art',{
+    //3.组件间的通信
+    props: ['detail'],
+    template:'<div class="li"><h2>{{detail.title}}</h2><div class="info"><span class="author">{{detail.author}}</span><span class="time">{{detail.time}}</span><span v-show="detail.isOrigin">原创</span><img :src="detail.url" alt=""/></div></div>'
+    // 注：是形参detail.xxx
+  }) 
+  var vm=new Vue({
+  el:'#app',
+  data:{
+    // 1.1定义数据源
+    // art:{
+    //   title:'我是标题',
+    //   author:'我是作者',
+    //   time:"我是时间",
+    //   isOrigin:true,
+    //   url:'https://www.baidu.com/img/bd_logo1.png'
+    // }
+
+    //1.2 定义数据源
+    arts:[{
+      title:'我是标题',
+      author:'我是作者',
+      time:"我是时间",
+      isOrigin:true,
+      url:'https://www.baidu.com/img/bd_logo1.png'
+    },
+    {
+      title:'我是标题',
+      author:'我是作者',
+      time:"我是时间",
+      isOrigin:true,
+      url:'https://www.baidu.com/img/bd_logo1.png'
+    },
+    {
+      title:'我是标题',
+      author:'我是作者',
+      time:"我是时间",
+      isOrigin:true,
+      url:'https://www.baidu.com/img/bd_logo1.png'
+    }
+    ]
+    
+  },
+  
+})
+</script>
+</html>

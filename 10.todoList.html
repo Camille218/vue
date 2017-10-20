@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /*去掉闪现的花括号*/
+    [v-cloak]{
+       display: none;
+    }
+    .edit{
+      display: block;
+      width: 80%;
+      height: 35px;
+      line-height: 35px;
+      margin: 30px auto;
+      box-sizing: border-box;
+      padding-left: 4px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      outline: 0; /*隐去默认的输入框蓝线*/
+      box-shadow: 0 0 5px #ccc; 
+      /*盒子阴影box-shadow: h-shadow v-shadow blur spread color inset;*/
+      /*水平和垂直方向上的正负值代表不同的方向*/
+    }
+    .list{
+      margin: 0 auto;
+      width: 100%;
+    }
+    .unit{
+      position: relative;
+      padding: 10px 0;
+      border-bottom: 1px solid #efefef
+    }
+    .unit:last-child{  /*父级元素中最后一个孩子*/
+      border-bottom: 0;
+    }
+    .finish{
+      text-decoration: line-through;/*删除线*/
+      color: #ccc;
+    }
+    .del{
+      background: red;
+      position: absolute;
+      right: 0;
+      font-size:12px;
+      color: #fff;
+      border-radius: 5px;
+      padding: 2px 5px;
+      border: 0;
+      outline: 0;
+    }
+    .empty{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+  <input type="text" v-model="task.content" placeholder="编写任务" class="edit" @keydown.enter="addTask"><!--vue的键盘事件-->
+  
+  <div class="list">
+    <div class="unit" v-for="(item,index) in list"><input type="checkbox" @click="changeState(index)" :checked="item.finished"><span :class="{'finish':item.finished}">{{index+1}}.{{item.content}}</span><button @click="removeTask(index)" class="del">删除</button></div>
+  </div>
+  <p v-show="!list.length" class="empty">暂无内容</p>
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+var vm=new Vue({
+  el:'#app',
+  data:{
+    //默认
+    task:{
+      content:"",
+      finished:false,
+      deleted:false
+    },
+    list:[]
+  },
+  methods:{
+    addTask:function(){
+      this.list.push(this.task);
+      //存入list[]后，重置task
+      this.task={
+         content:"",
+        finished:false,
+        deleted:false
+      }
+    },
+    changeState:function(index){
+      let curState=this.list[index].finished;
+      this.list[index].finished=!curState;
+      // let是ES6声明变量    !状态
+    },
+    removeTask:function(index){
+      this.list.splice(index,1);
+    }
+  }
+
+  
+})
+//控制台打印：vm.$data.task.content
+</script>
+</html>

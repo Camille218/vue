@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{margin: 0;padding: 0}
+    [v-cloak]{
+      display: none;
+    }
+   .wrap{
+     width: 400px;
+     height: 604px;
+     border: 1px solid red;
+     margin: 0 auto;
+     
+   }
+   .up{
+     width: 100%;
+     height: 200px;
+     background: #ccc;
+     overflow: hidden;
+   }
+   .result{
+     font-size: 50px;
+     margin-top: 100px;
+     text-align: right;
+   }
+   .enter{
+     text-align: right;
+     font-size: 30px;
+   }
+   .down{
+     width: 100%;
+     height: 404px;
+     list-style: none;
+     display: flex;
+     flex-wrap: wrap
+   }
+   .down .keys{
+     width: 24.5%;
+     height: 100px;
+     border: 1px solid #ccc;
+     text-align: center;
+     line-height: 100px;
+     font-size: 18px;
+   }
+   .keys:first-child{
+     color: orangered;
+   }
+    .keys:last-child{
+     background: orangered;
+     color: white;
+   }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+  <div class="wrap">
+    <div class="up">
+      <!--绑定计算属性result-->
+      <p class="result">{{result}}</p>
+      <!--绑定计算属性enter-->
+      <p class="enter">{{enter===""?0:enter}}</p>
+    </div>
+    <div class="down">
+      <keyboard v-for='item in keys' :value="item"></keyboard>
+    </div>
+  </div>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<!--一、引入vuex.js-->
+<script src="js/vuex.js"></script>
+<script>
+// 创建store仓库
+const store=new Vuex.Store({
+  state:{
+    result:"",//运算结果
+    enter:""//输入的值
+  },
+  //理解：把result和enter看作是应用层级的状态，所以定义为仓库store的state对象的属性值来管理它们，初始化为空字符串
+
+  //定义名为calculate的mutation
+  mutations: {
+    calculate(state,value){
+      if(value==="="){
+        //按键的值为=，进行结果计算
+        state.result=eval(state.enter);
+        state.enter+=value;
+      }else if(value === 'clear'){
+        //按键的值为clear，清空数据
+        state.result = state.enter = "";
+      }else{
+        //输入结果enter进行拼接
+        state.enter += value;
+      }
+    }
+  }
+
+})
+
+//自定义组件
+Vue.component('keyboard',{
+  //接受的参数value,代表键盘的值
+  props:['value'],
+  //模板
+  template:'<div :data-value="value" class="keys" @click="getKeyboardValue">{{value}}</div>',
+  methods: {
+    //点击事件处理函数
+    getKeyboardValue(event){
+      //获取当前的按键值
+      let value=event.target.dataset.value;
+      //通过commit提交mutation
+      this.$store.commit('calculate',value)
+    }
+  }
+});
+
+//创建vue实例
+const app=new Vue({
+  //挂载元素
+  el:"#app",
+  data:{
+    keys:[
+      'clear','+','-','*',
+      '7','8','9','/',
+      '4','5','6','0',
+      '1','2','3','=',
+    ]
+  },
+  //关联仓库store和vue实例
+  //Vuex提供了store选项，允许我们将仓库store引入到根组件，并且此根组件的所有子组件都可以使用到仓库store，而且子组件无需显示的引入。
+  //引入store,且能通过this.$store访问它
+  store,//es6语法，类似store:store
+
+  //增加计算属性
+  computed: {
+    result(){
+      //通过this.$store获取仓库的数据result
+      return this.$store.state.result
+    },
+    enter(){
+      //通过this.$store获取仓库的数据result
+      return this.$store.state.enter
+    }
+  }
+  //理解：将仓库的状态result和enter关联到了我们的实例中的计算属性result和enter，这样，每当仓库中的运算结果result和输入值enter发生了变化，实例中的计算属性result和enter也会做出响应式更新。
+})
+
+
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--左侧导航栏区域-->
+  <div class="nav">
+    <!--<a href="">简易vue</a>
+    <a href="">趣味ES6</a>
+    <a href="">人在职场</a>-->
+    <!--使用router-link组件来导航-->
+    <router-link to="/vue">简易vue</router-link>
+    <router-link to="/es6">趣味ES6</router-link>
+    <router-link to="/career">人在职场</router-link>
+  </div>
+  <!--右侧内容区域-->
+  <div class="content">
+    <!--<div></div>
+    <div></div>
+    <div></div>-->
+    <!--匹配的组件将渲染在这里-->
+    <router-view></router-view>
+  </div>
+</div>
+</body>
+<script src="vue.js"></script>
+<script src="vue-router.js"></script>
+<script>
+
+//一、定义路由对应的组件,将被替换渲染到router-view组件的内容
+//1.简易VUE
+const vueComponent={
+  template:`<div>这里是《简易VUE》教程</div>`
+};
+//2.趣味ES6
+const es6Component={
+  template:`<div>这里是《趣味ES6》教程</div>`
+};
+//3.人在职场
+const careerComponent={
+  template:`<div>这里是《人在职场》教程</div>`
+};
+
+//二、创建router实例，并定义导航和组件的映射关系
+const router=new VueRouter({
+  //配置routes
+  routes:[
+    {
+      path:'/vue',
+      component:vueComponent
+    },
+    {
+      path:'/es6',
+      component:es6Component
+    },
+    {
+      path:'/career',
+      component:careerComponent
+    }
+  ]
+});
+
+//创建vue实例，注入路由router
+const app=new Vue({
+  el:'#app',
+  router:router//es5语法，如果是es6语法：router(仅仅一个)
+  // data:{
+
+  // },
+
+  
+});
+</script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script src="vue.js"></script>
+<script>
+// var vm=new Vue({
+//   el:'#app',
+//   data:{
+
+//   },
+  
+// })
+//vuex定义:
+//专为Vue开发的应用程序的状态管理模式，它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。（状态管理模式(集中式)    相应的规则使状态变化）
+//Vuex的作用类似全局对象，使用单一状态树，用一个对象State包含了整个应用层级的所有状态，可以理解为这些状态就是一堆全局变量和数据。
+
+
+//优势：
+//1、Vuex的状态存储是响应式的:你的组件使用到了这个Vuex的状态，一旦它改变了，所有关联的组件都会自动更新相对应的数据
+
+//2、Vuex的作用类似全局对象,但不能随意修改Vuex的状态，想修改就得使用Vuex提供的唯一途径：显示地提交（commint）mutations来实现修改，方便我们跟踪每一个状态的变化
+
+//适用场景：
+//较大型的应用，出现多个视图组件共同依赖一个状态，这个状态相当于我们的全局对象数据，其他组件的改动，会影响到它，反之，它的修改也需要更新其他关联的组件，那么Vuex就很适用。比如：商城系统，外卖系统等等。
+
+//核心：1、state 2、Getters 3、Mutations
+
+//一、创建仓库Store，进行状态管理
+const store=new Vuex.Store({
+  //1、state存储应用层的状态(vuex的核心)
+  state:{
+    count:5
+  },
+  //理解：假设我们有一个全局状态count的值为5。那么，我们就可以将其定义为 state 对象中的key和value，作为全局状态供我们使用。
+
+  //2、派生出来的状态，类似对data派生出的计算属性computed
+  getters: {
+    newCount:state=>state.count*3//es6语法
+    //传统语法
+    // newCount:function (state ) {
+    //     return state.count * 3;
+    // }
+  },
+  //理解：假设我们要在state.count的基础上派生出一个新的状态newCount出来，就适合使用我们的 getters 
+
+  //3、更改store状态的唯一途径
+  mutations: {
+    increment(state,n){
+      state.count+=n;
+    }
+  },
+})
+ store.commit('increment', 10)
+ //理解：1、先定义：在 mutations 中定义了一个叫increment的函数，函数体就是我们要进行更改的地方2、再使用：遵循mutations语法提交，在提交commit 时候，字符串参数increment,就是对应在 mutations 中的increment，此外接受其他额外参数，与定义mutations 时对应的形参相对应
+
+
+</script>
+</html>

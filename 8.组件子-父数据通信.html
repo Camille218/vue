@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  
+</head>
+<body>
+<div id="app">
+ <son @connect='say'></son>
+ <!--实现点击子组件成功调用父级的方法,实现子->父之间的数据通信-->
+  
+</div>
+</body>
+<script src="vue.js"></script>
+<script>
+ //就是一个按钮button，点击它的时候，会触发组件内部的send( )方法，而方法体里面会触发一个事件，事件名取名为：“connect”。
+  Vue.component('son',{
+    template:'<button @click="send">点击</button>',
+    // methods:{
+    //   send(){
+    //     this.$emit('connect');
+    //     //$emit指eventName事件名
+    //   }
+    // }
+
+    data(){
+      return {
+        msg:"大家好，我是子组件的数据源"
+      }
+    },
+    methods:{
+      send(){
+        this.$emit('connect',this.msg);
+        //$emit指eventName事件名
+      }
+    }
+  }) 
+  const vm=new Vue({
+    el:'#app',
+    // methods: {
+    //   say(){
+    //     console.log('我监听到了connect');
+    //   }
+    // },
+     methods: {
+      say(msg){
+        console.log(msg);
+      }
+    }
+})
+</script>
+</html>
