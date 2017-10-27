@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+<script>
+//Get请求
+axios.get('/detail',{
+  //参数
+  params:{ 
+    id:10
+  }
+}).then(function(res){
+  //成功获取数据
+  console.log(res);
+}).catch(function(err){
+  //请求错误
+  console.log(err);
+})
+
+
+axios.get('/detail?id=10').then(function(res){
+  //成功获取数据
+  console.log(res);
+}).catch(function(err){
+  //请求错误
+  console.log(err);
+})
+//没有第一种写法的可读性高
+
+
+//Post请求高
+axios.post('/add',{
+  name:'前端',
+  age:26
+}).then(function(res){
+  //请求成功
+  console.log(res)
+}).catch(function(err){
+  //请求失败
+  console.log(err)
+})
+
+//多个请求并发
+function getProfile(){
+  //请求1
+  return axios.get('/profile');
+}
+function getUser(){
+  //请求2
+  return axios.get('/user');
+}
+  //并发请求
+axios.all([
+  getProfile(),
+  getUser()
+]).then(axios.spread(function(res1,res2){
+  //两个请求现已完成
+  console.log(res1);
+  console.log(res2);
+}))
+var vm=new Vue({
+  el:'#app',
+  data:{
+
+  },
+  
+})
+</script>
+</html>
