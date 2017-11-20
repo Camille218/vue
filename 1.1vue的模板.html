@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--写法2.1-->
+  <template id="str">
+        <p>我是template</p>
+    </template>
+  <div id="app">
+
+  </div>
+</body>
+<script src="js/vue.js"></script>
+<!--写法2.0-->
+<!--<script type="x-template" id="str">
+    <p>我是一个p标签</p>
+</script>-->
+<script>
+  //1、html模板
+  //插值：v-text  v-html  {{}}...
+
+
+
+  //2、字符串模版:template字符串
+  //注：权重比较高，直接“代替”挂载点#app，把原来的html替换后显示#str里的内容。局限性：不能跨文件使用，一个页面中可以使用
+document.addEventListener('DOMContentLoaded',function () {
+        var vm = new Vue({
+            el: '#app',//挂载点
+            template: '#str'//替换挂载点的模板
+        });
+    },false);
+
+
+
+  //3、模版—render函数
+</script>
+
+
+</html>

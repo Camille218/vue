@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <div v-color="colorStaus">我是一个普通的div元素</div>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+//注册全局指令：所有人都可以用
+// Vue.directive('color',function(el,binding) {//指令名称注意不要加**v-**
+//   console.log(el);//当前绑定自定义指令的元素，可以用来直接操作DOM
+//   console.log(binding.value);//一些参数，常用的  => binding.value（指令的值
+//   el.style.backgroundColor='red';
+// })
+// var vm=new Vue({
+//   el:'#app',
+//   data:{
+//     colorStaus:true
+//   },
+  
+// })
+
+//注册局部指令:当前组件下可用
+var vm=new Vue({
+  el:'#app',
+  data:{
+    colorStaus:true
+  },
+  directives: {//(s)
+    'color':function(el,binding){
+      el.style.backgroundColor='orange'
+    }
+  }
+})
+ 
+</script>
+</html>

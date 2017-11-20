@@ -73,5 +73,28 @@ var vm=new Vue({
   
 })
 //如果需要频繁切换显示/隐藏的，就用 v-show ；如果运行后不太可能切换显示/隐藏的，就用 v-if 。
+
+//拓展：https://cn.vuejs.org/v2/api/#%E6%8C%87%E4%BB%A4
+
+
+
+// a) 当行间不触发的时候
+// v-on:keyup.enter = "addTodo"   
+// addTodo(ev){ }  //这里的ev就是事件对象
+
+// b) 当行间触发的时候（也就是加了个执行的括号）
+// v-on:keyup.enter = "addTodo(123,$event)"   //行间传入事件对象$event
+// addTodo(data,ev){  }  //需要在页面传参的时候，第一个参数为传入的参数，第二个参数才是事件对象。
+
+// 事件修饰符：
+// .stop（冒泡）  |  .prevent（默认事件）   |  .capture（捕获）   |  .self   |  .once（执行一次）
+// 按键修饰符（常用的） --
+// .enter  |  .tab  |  .delete  |  .esc
+// .space  |  .up   |  .down    |  .left  |  .right
+// .ctrl   |  .alt  |  .shift   |  .meta
+// .键值
+//Eg:   v-on:eventName.修饰符 = "xxx"  @keyup.enter = "addTodo()"    <=>    @keyup.13 = "addTodo()"
+
+
 </script>
 </html>
