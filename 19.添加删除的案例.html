@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #app{
+      margin: 50px auto;
+      width: 600px;
+
+    }
+    fieldset{
+      border: 2px orange solid;
+      margin-bottom: 20px;
+    }
+    fieldset input{
+      width: 200px;
+      height: 30px;
+      margin: 10px 0;
+    }
+    table{
+      width: 600px;
+      border: 2px solid orange;
+      text-align: center;
+    }
+    thead{
+      background: orange;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--第一部分-->
+  <fieldset>
+    <legend>学生录入系统</legend>
+    <div>
+      <span>姓名：</span>
+      <input type="text" placeholder="请输入用户姓名" v-model='newStudent.name'>
+    </div>
+    <div>
+      <span>年龄：</span>
+      <input type="text" placeholder="请输入用户年龄" v-model='newStudent.age'>
+    </div>
+    <div>
+      <span>性别：</span>
+      <select name="" id="" v-model='newStudent.sex'>
+        <option value="男">男</option>
+        <option value="女">女</option>
+      </select>
+    </div>
+    <div>
+      <span>手机：</span>
+      <input type="text" placeholder="请输入手机号码" v-model='newStudent.phone'>
+    </div>
+    <button  @click='createNewStudent()'>创建新用户</button>
+  </fieldset>
+  <!--第二部分-->
+  <table>
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>手机</th>
+        <th>删除</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for='(p,index) in persons'>
+        <td>{{p.name}}</td>
+        <td>{{p.age}}</td>
+        <td>{{p.sex}}</td>
+        <td>{{p.phone}}</td>
+        <td><button @click='deleteStudent(index)'>删除</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+var vm=new Vue({
+  el:'#app',
+  data:{
+    persons:[
+      {name:'张三',age:20,sex:'女',phone:'18918394322'},
+      {name:'李四',age:23,sex:'男',phone:'18918394322'},
+      {name:'王五',age:50,sex:'男',phone:'18918394322'},
+      {name:'赵六',age:29,sex:'男',phone:'18918394322'},
+    ],
+    newStudent:{name:'',age:'',sex:'男',phone:''}
+  },
+  methods: {
+    //创建一条新纪录
+    createNewStudent(){
+      //容错处理
+      //姓名不能为空
+      if(this.newStudent.name===''){
+        alert('姓名不能为空');
+        return;
+      }
+      //年龄不能小于0
+      if(this.newStudent.age<=0){
+        alert('请输入正确的年龄');
+        return;
+      }
+      //手机号码，真实开发需要正则判断
+      if(this.newStudent.age===''){
+        alert('手机号码不正确');
+        return;
+      }
+      //向数组添加新数据
+      this.persons.unshift(this.newStudent);//可向数组的开头添加一个或更多元素,并返回新的长度
+      //清空数据
+      this.newStudent={name:'',age:'男',sex:'',phone:''};
+    },
+    deleteStudent(index){
+      this.persons.splice(index,1)
+    }
+  }
+});
+//知识点：
+//1.<fieldset><legend></legend></fieldset>
+//2.容错处理if(){return;}
+//3.unshift()、splice()、v-for='(item,index)in arr'删除数据的索引、表单与数据的关联:obj.name
+</script>
+</html>

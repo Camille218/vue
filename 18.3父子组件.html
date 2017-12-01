@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <parent></parent>
+  <!--拓展：如果想让子组件单独使用，需要把子组件注册为全局组件再使用-->
+  <child></child>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+  //1.子组件构造器
+  let Child1=Vue.extend({
+    template:`<p>我认为ajjaja自己很美</p>`
+  });
+  let Child2=Vue.extend({
+    template:`<p>我认为自己很美</p>`
+  });
+
+  //拓展：单独使用子组件
+  Vue.component('child',Child1);
+  //2.父组件构造器
+  Vue.component('parent',{
+    components:{
+      'my-Child1':Child1,
+      'my-Child2':Child2
+    },
+    template:
+    `
+      <div>
+        <my-Child1></my-Child1>
+        <my-Child2></my-Child2>
+      </div>
+    `
+  });
+  var vm=new Vue({
+    el:'#app',
+    data:{
+
+    },
+    
+  })
+</script>
+</html>

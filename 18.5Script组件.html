@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <my_div></my_div>
+</div>
+<script id='my_div' type="text/template">
+  <!--注：最外层用一个div包裹是保证只有一个出口，不然报错-->
+  <div>
+    <div>我是MT</div>
+    <input type="date">
+    <img src="" alt="">
+  </div>
+</script>
+</body>
+<script src="js/vue.js"></script>
+<script>
+  //1.实例化组件
+  Vue.component('my_div',{
+    template:'#my_div'
+  });
+  var vm=new Vue({
+    el:'#app',
+    data:{
+
+    },
+    
+  });
+</script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <my-parent :imgtitle="title" :imgsrc='img'></my-parent>
+</div>
+<template id="my_img">
+  <img :src="imgsrc" alt="">
+</template>
+
+<template id="my_title">
+  <p>{{title}}</p>
+</template>
+
+<template id="my-parent">
+  <div>
+    <child1 :imgsrc="imgsrc"></child1>
+    <child2 :title='imgtitle'></child2>
+  </div>
+</template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+  //1.子组件的实例
+  let child1=Vue.extend({
+    template:'#my_img',
+    props: ['imgsrc']
+  });
+  let child2=Vue.extend({
+    template:'#my_title',
+    props:['title']
+  });
+
+  //2.注册父组件
+  Vue.component('my-parent',{
+    props:['imgtitle','imgsrc'],
+    components: {
+      'child1':child1,
+      'child2':child2
+    },
+    template:'#my-parent'
+  })
+var vm=new Vue({
+  el:'#app',
+  data:{
+    title:'嚯哈哈',
+    img:"D:\newLife\vue\vueTest\a.png"
+  },
+  
+})
+</script>
+</html>

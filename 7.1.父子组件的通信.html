@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <my-div message="哈哈哈" imgsrc="D:\newLife\vue\vueTest\a.png"></my-div>
+  <my-div message="呵呵呵" imgsrc="D:\newLife\vue\vueTest\a.png"></my-div>
+</div>
+<template id="my-div">
+  <div>
+    <h1>{{message}}</h1>
+    <img :src="imgsrc" alt="">
+  </div>
+</template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+  //父子组件的通信：props down ,events up
+  Vue.component('my-div',{
+    template:'#my-div',
+    props:['message','imgsrc']
+  })
+var vm=new Vue({
+  el:'#app',
+  data:{
+
+  },
+  
+})
+</script>
+</html>
